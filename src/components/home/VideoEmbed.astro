@@ -1,0 +1,32 @@
+---
+const videoPath = "src/assets/home/videos/hero.mp4";
+---
+
+<header class="relative h-screen overflow-hidden">
+    <video
+        autoplay
+        muted
+        loop
+        class="absolute inset-0 w-full h-full object-cover"
+    >
+        <source src={videoPath} type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <!-- Centered text -->
+    <div class="absolute inset-0 flex items-center justify-center">
+        <h1 class="text-white text-4xl md:text-6xl font-bold drop-shadow-lg">
+            Like Fiber, But Wireless
+        </h1>
+    </div>
+</header>
+
+<!-- poster="/path/to/poster-image.jpg" -->
+
+<!--
+https://ui.com/microsite/static/media/introduction-2.fcdfaf59.mp4
+https://ui.com/microsite/static/media/introduction-1.d0d8ef8f.mp4
+https://ui.com/microsite/static/media/hero.c352ad5d.mp4 -->
+<!-- https://ui.com/us/en/wifi/flagship -->
+<!-- https://ui.com/us/en/wifi/bridging/building-bridge -->

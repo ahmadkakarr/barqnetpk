@@ -1,0 +1,359 @@
+---
+// Code fence for JavaScript
+import "../styles/global.css";
+// import "../styles/navigation.css";
+
+// Define navigation links and submenus
+const navItems = [
+    { href: "/", text: "Home" },
+    {
+        href: "#",
+        text: "Services",
+        submenu: [
+            { href: "/student-counselling", text: "Student Counselling" },
+            { href: "#", text: "Market Research" },
+            { href: "#", text: "Business Consulting" },
+            { href: "#", text: "Feasibility Studies" },
+            { href: "#", text: "Training Programs" },
+        ],
+    },
+    { href: "#", text: "About" },
+    {
+        href: "#",
+        text: "Resources",
+        submenu: [
+            { href: "#", text: "Case Studies" },
+            { href: "#", text: "White Papers" },
+            { href: "#", text: "Blog" },
+        ],
+    },
+    { href: "#", text: "Contact" },
+];
+---
+
+<header class="bg-white shadow-md">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+        <!-- Logo -->
+        <div class="text-3xl font-bold text-primary">
+            <picture>
+                <source srcset="/images/logo/logo.webp" type="image/webp" />
+                <img
+                    src="/images/logo/logo.webp"
+                    alt="BARQ TELCOM"
+                    class="h-12 w-auto"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='inline';"
+                />
+                <span class="hidden">
+                    <span class="text-accent">B</span>RIFT <span
+                        class="text-primary">CONSULTANCY</span
+                    >
+                </span>
+            </picture>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex space-x-8 relative">
+            {
+                navItems.map((item) => (
+                    <div class="group relative">
+                        <a
+                            href={item.href}
+                            class="text-secondary hover:text-primary flex items-center gap-1 py-2"
+                        >
+                            {item.text}
+                            {item.submenu && (
+                                <svg
+                                    class="w-4 h-4 transition-transform transform group-hover:rotate-180"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 9l-7 7-7-7"
+                                    />
+                                </svg>
+                            )}
+                        </a>
+                        {item.submenu && (
+                            <div class="absolute top-full left-0 bg-white shadow-lg rounded-lg mt-2 py-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out z-50">
+                                {item.submenu.map((subItem) => (
+                                    <a
+                                        href={subItem.href}
+                                        class="block px-4 py-2 text-secondary hover:bg-gray-100 hover:text-primary"
+                                    >
+                                        {subItem.text}
+                                    </a>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                ))
+            }
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center">
+            <button
+                type="button"
+                class="mobile-menu-button p-2"
+                aria-label="Toggle mobile menu"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Backdrop -->
+    <div class="mobile-menu-backdrop fixed inset-0 bg-black/50 z-40 hidden">
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+        class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50"
+    >
+        <div
+            class="p-4 border-b border-gray-200 flex justify-between items-center"
+        >
+            <!-- Mobile Logo -->
+            <div class="text-xl font-bold text-primary">
+                <picture>
+                    <source srcset="/images/logo/logo.webp" type="image/webp" />
+                    <img
+                        src="/images/logo/logo.webp"
+                        alt="BARQ TELECOM"
+                        class="h-8 w-auto"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='inline';"
+                    />
+                    <span class="hidden">
+                        <span class="text-accent">B</span>RIFT <span
+                            class="text-primary">CONSULTANCY</span
+                        >
+                    </span>
+                </picture>
+            </div>
+            <button
+                type="button"
+                class="mobile-menu-close p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none"
+                aria-label="Close menu"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav class="py-4">
+            {
+                navItems.map((item) => (
+                    <div class="relative">
+                        <a
+                            href={item.href}
+                            class="block py-3 px-4 text-secondary hover:bg-gray-100 hover:text-primary transition-colors flex items-center justify-between mobile-menu-link"
+                            data-has-submenu={!!item.submenu}
+                        >
+                            {item.text}
+                            {item.submenu && (
+                                <svg
+                                    class="w-4 h-4 transition-transform transform"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 9l-7 7-7-7"
+                                    />
+                                </svg>
+                            )}
+                        </a>
+                        {item.submenu && (
+                            <div class="submenu pl-6 hidden">
+                                {item.submenu.map((subItem) => (
+                                    <a
+                                        href={subItem.href}
+                                        class="block py-2 px-4 text-secondary hover:bg-gray-100 hover:text-primary"
+                                    >
+                                        {subItem.text}
+                                    </a>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                ))
+            }
+        </nav>
+    </div>
+</header>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.querySelector(".mobile-menu-button");
+        const mobileMenu = document.querySelector(".mobile-menu");
+        const mobileMenuBackdrop = document.querySelector(
+            ".mobile-menu-backdrop",
+        );
+        const mobileMenuCloseButton =
+            document.querySelector(".mobile-menu-close");
+        const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
+
+        let isMenuOpen = false;
+
+        function toggleMobileMenu() {
+            isMenuOpen = !isMenuOpen;
+
+            if (isMenuOpen) {
+                mobileMenu.classList.remove("translate-x-full");
+                mobileMenuBackdrop.classList.remove("hidden");
+                document.body.classList.add("overflow-hidden");
+            } else {
+                mobileMenu.classList.add("translate-x-full");
+                mobileMenuBackdrop.classList.add("hidden");
+                document.body.classList.remove("overflow-hidden");
+            }
+        }
+
+        // Toggle mobile menu
+        mobileMenuButton?.addEventListener("click", toggleMobileMenu);
+        mobileMenuCloseButton?.addEventListener("click", toggleMobileMenu);
+        mobileMenuBackdrop?.addEventListener("click", toggleMobileMenu);
+
+        // Handle mobile submenu toggles
+        mobileMenuLinks.forEach((link) => {
+            if (link.dataset.hasSubmenu === "true") {
+                link.addEventListener("click", (e) => {
+                    e.preventDefault(); // Prevent default only for links with submenus
+                    const submenu = link.nextElementSibling;
+                    const arrow = link.querySelector("svg");
+
+                    submenu.classList.toggle("hidden");
+                    arrow?.classList.toggle("rotate-180");
+                });
+            } else {
+                // Allow default behavior for links without submenus
+                link.addEventListener("click", () => {
+                    toggleMobileMenu(); // Close the mobile menu when a link is clicked
+                });
+            }
+        });
+    });
+</script>
+
+<style>
+    /* Base styles */
+    :root {
+        --primary-color: #2563eb;
+        --accent-color: #3b82f6;
+        --secondary-color: #4b5563;
+        --gradient-start: #b2d8d8; /* Darker blue */
+        --gradient-end: #ffffff; /* Lighter blue */
+    }
+
+    /* Gradient background for navigation */
+    header {
+        background: linear-gradient(
+            90deg,
+            var(--gradient-start),
+            var(--gradient-end)
+        );
+    }
+
+    /* Mobile menu transitions */
+    .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 16rem;
+        background-color: white;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 50;
+    }
+
+    .mobile-menu.translate-x-full {
+        transform: translateX(100%);
+    }
+
+    .mobile-menu:not(.translate-x-full) {
+        transform: translateX(0);
+    }
+
+    .mobile-menu-backdrop {
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .mobile-menu-backdrop:not(.hidden) {
+        opacity: 1;
+    }
+
+    /* Submenu transitions */
+    .submenu {
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Arrow rotation */
+    .rotate-180 {
+        transform: rotate(180deg);
+    }
+
+    /* Responsive adjustments */
+    @media (min-width: 768px) {
+        .mobile-menu,
+        .mobile-menu-backdrop {
+            display: none;
+        }
+    }
+
+    /* Navigation styles */
+    nav a {
+        font-family: "Brush Script MT", cursive;
+    }
+
+    nav a:hover {
+        background-color: var(--accent-color);
+        color: white;
+    }
+
+    .mobile-menu a {
+        font-family: "Brush Script MT", cursive;
+    }
+
+    .mobile-menu a:hover {
+        background-color: var(--accent-color);
+        color: white;
+    }
+
+    /* Cursor pointer for buttons */
+    .mobile-menu-button,
+    .mobile-menu-close {
+        cursor: pointer;
+    }
+</style>
