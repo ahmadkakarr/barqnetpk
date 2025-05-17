@@ -1,0 +1,20 @@
+---
+// src/components/Dropdown.astro
+import Alpine from "alpinejs";
+//
+// Initialize Alpine when the page loads
+document.addEventListener("DOMContentLoaded", () => {
+    Alpine.start();
+});
+---
+
+<script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+        Alpine.data("dropdown", () => ({
+            open: false,
+            toggle() {
+                this.open = !this.open;
+            },
+        }));
+    });
+</script>

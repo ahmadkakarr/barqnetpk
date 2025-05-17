@@ -1,5 +1,7 @@
 ---
-import Navigation from "../components/Navigation.astro";
+import NavigationWithMobileIcons1 from "../components/NavigationWithMobileIcons1.jsx";
+import NavigationWithMobileIconsHTML1 from "../components/NavigationWithMobileIconsHTML1.astro";
+import NavigationCustom1 from "../components/NavigationCustom1.astro";
 import VideoEmbed from "../components/home/VideoEmbed.astro";
 import SliderSwiper from "../components/SliderSwiper.astro";
 import Layout from "../layouts/Layout.astro";
@@ -9,7 +11,9 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-    <Navigation />
+    <NavigationWithMobileIcons1 client:load />
+    <!-- <NavigationCustom1 /> -->
+    <!-- <NavigationWithMobileIconsHTML1 /> -->
     <VideoEmbed />
     <!-- <SliderSwiper /> -->
 </Layout>
