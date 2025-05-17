@@ -8,44 +8,62 @@ import { Radio, RadioGroup } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/20/solid'
 
 const frequencies = [
-    { value: 'monthly', label: 'Monthly', priceSuffix: '/month' },
-    { value: 'annually', label: 'Annually', priceSuffix: '/year' },
+    { value: 'monthly', label: 'Home', priceSuffix: '/month' },
+    { value: 'annually', label: 'Business', priceSuffix: '/year' },
 ]
 const tiers = [
     {
-        name: 'Freelancer',
+        price: { monthly: 'Rs. 1999', annually: '$199' },
+        name: '10 Mbps',
         id: 'tier-freelancer',
         href: '#',
-        price: { monthly: '$19', annually: '$199' },
-        description: 'The essentials to provide your best work for clients.',
+        description: '',
         features: ['48-hour support response time'],
         mostPopular: false,
     },
     {
-        name: 'Startup',
-        id: 'tier-startup',
+        price: { monthly: 'Rs. 2999', annually: '$199' },
+        name: '20 Mbps',
+        id: 'tier-freelancer',
         href: '#',
-        price: { monthly: '$29', annually: '$299' },
-        description: 'A plan that scales with your rapidly growing business.',
-        features: [
-
-            '24-hour support response time',
-            'Marketing automations',
-        ],
-        mostPopular: true,
+        description: '',
+        features: ['48-hour support response time'],
+        mostPopular: false,
     },
     {
-        name: 'Enterprise',
-        id: 'tier-enterprise',
+        price: { monthly: 'Rs. 3799', annually: '$199' },
+        name: '30 Mbps',
+        id: 'tier-freelancer',
         href: '#',
-        price: { monthly: '$59', annually: '$599' },
-        description: 'Dedicated support and infrastructure for your company.',
-        features: [
-
-            'Advanced analytics',
-            '1-hour, dedicated support response time',
-
-        ],
+        description: '',
+        features: ['48-hour support response time'],
+        mostPopular: false,
+    },
+    {
+        price: { monthly: 'Rs. 5499', annually: '$199' },
+        name: '40 Mbps',
+        id: 'tier-freelancer',
+        href: '#',
+        description: '',
+        features: ['48-hour support response time'],
+        mostPopular: false,
+    },
+    {
+        price: { monthly: 'Rs. 6499', annually: '$199' },
+        name: '50 Mbps',
+        id: 'tier-freelancer',
+        href: '#',
+        description: '',
+        features: ['48-hour support response time'],
+        mostPopular: false,
+    },
+    {
+        price: { monthly: 'Rs. 11999', annually: '$199' },
+        name: '100 Mbps',
+        id: 'tier-freelancer',
+        href: '#',
+        description: '',
+        features: ['48-hour support response time'],
         mostPopular: false,
     },
 ]
@@ -67,8 +85,7 @@ export default function Example() {
                     </p>
                 </div>
                 <p className="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-                    Choose an affordable plan that’s packed with the best features for engaging your audience, creating customer
-                    loyalty, and driving sales.
+                    Choose an affordable plan that’s packed with the best features.
                 </p>
                 <div className="mt-16 flex justify-center">
                     <fieldset aria-label="Payment frequency">

@@ -16,8 +16,8 @@ import {
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 
 const products = [
-    { name: 'Packages for Home', description: 'Get a better understanding of your traffic', href: '/plans', icon: ChartPieIcon },
-    { name: 'Business', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
+    { name: 'Home Services', description: 'Get a better understanding of your traffic', href: '/residential-services/data-plans/pricing', icon: ChartPieIcon },
+    { name: 'Business Services', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
     // { name: 'Security', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
     // { name: 'Integrations', description: 'Connect with third-party tools', href: '#', icon: SquaresPlusIcon },
     // { name: 'Automations', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
@@ -108,15 +108,15 @@ export default function Example() {
                         </PopoverPanel>
                     </Popover>
 
-                    <a href="#" className="text-sm/6 font-semibold text-gray-900">
+                    <a href="#" className="text-sm/6 font-semibold text-gray-200">
                         Features
                     </a>
-                    <a href="#" className="text-sm/6 font-semibold text-gray-900">
+                    <a href="#" className="text-sm/6 font-semibold text-gray-200">
                         Marketplace
                     </a>
 
                     <Popover className="relative">
-                        <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900">
+                        <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-200">
                             Company
                             <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
                         </PopoverButton>
