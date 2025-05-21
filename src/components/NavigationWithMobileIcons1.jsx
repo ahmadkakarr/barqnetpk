@@ -2,7 +2,7 @@ import "../styles/global.css";
 
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Dialog, DialogPanel, Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/react'
 import {
     ArrowPathIcon,
@@ -39,6 +39,44 @@ const company = [
 
 export default function Example() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [packagesOpen, setPackagesOpen] = useState(false)
+    const [companyOpen, setCompanyOpen] = useState(false)
+
+    // Add refs for timeouts
+    const packagesTimeoutRef = useRef(null)
+    const companyTimeoutRef = useRef(null)
+
+    const handlePackagesClose = () => {
+        packagesTimeoutRef.current = setTimeout(() => {
+            setPackagesOpen(false)
+        }, 300)
+    }
+
+    const handleCompanyClose = () => {
+        companyTimeoutRef.current = setTimeout(() => {
+            setCompanyOpen(false)
+        }, 300)
+    }
+
+    const clearPackagesTimeout = () => {
+        if (packagesTimeoutRef.current) {
+            clearTimeout(packagesTimeoutRef.current)
+        }
+    }
+
+    const clearCompanyTimeout = () => {
+        if (companyTimeoutRef.current) {
+            clearTimeout(companyTimeoutRef.current)
+        }
+    }
+
+    // Cleanup timeouts on unmount
+    useEffect(() => {
+        return () => {
+            if (packagesTimeoutRef.current) clearTimeout(packagesTimeoutRef.current)
+            if (companyTimeoutRef.current) clearTimeout(companyTimeoutRef.current)
+        }
+    }, [])
 
     return (
         <header className="absolute inset-x-0 top-0 z-50 bg-transparent backdrop-blur-sm">
@@ -63,16 +101,28 @@ export default function Example() {
                         <Bars3Icon aria-hidden="true" className="size-6" />
                     </button>
                 </div>
-                <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-                    <Popover className="relative">
-                        <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-200">
-                            Packages
-                            <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
-                        </PopoverButton>
+                <PopoverGroup className="hidden lg:flex lg:gap-x-12">                    <Popover className="relative">
+                    <PopoverButton
+                        className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-200"
+                        onMouseEnter={() => {
+                            clearPackagesTimeout()
+                            setPackagesOpen(true)
+                        }}
+                        onMouseLeave={handlePackagesClose}
+                    >
+                        Packages
+                        <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
+                    </PopoverButton>
 
+                    {packagesOpen && (
                         <PopoverPanel
-                            transition
-                            className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+                            static
+                            onMouseEnter={() => {
+                                clearPackagesTimeout()
+                                setPackagesOpen(true)
+                            }}
+                            onMouseLeave={handlePackagesClose}
+                            className="absolute left-0 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5"
                         >
                             <div className="p-4">
                                 {products.map((item) => (
@@ -106,35 +156,48 @@ export default function Example() {
                                 ))}
                             </div>
                         </PopoverPanel>
-                    </Popover>
+                    )}
+                </Popover>
 
                     <a href="#" className="text-sm/6 font-semibold text-gray-200">
                         Features
                     </a>
                     <a href="#" className="text-sm/6 font-semibold text-gray-200">
                         Marketplace
-                    </a>
-
-                    <Popover className="relative">
-                        <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-200">
+                    </a>                    <Popover className="relative">
+                        <PopoverButton
+                            className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-200"
+                            onMouseEnter={() => {
+                                clearCompanyTimeout()
+                                setCompanyOpen(true)
+                            }}
+                            onMouseLeave={handleCompanyClose}
+                        >
                             Company
                             <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
                         </PopoverButton>
 
-                        <PopoverPanel
-                            transition
-                            className="absolute -left-8 top-full z-10 mt-3 w-96 rounded-3xl bg-white p-4 shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
-                        >
-                            {company.map((item) => (
-                                <div key={item.name} className="relative rounded-lg p-4 hover:bg-gray-50">
-                                    <a href={item.href} className="block text-sm/6 font-semibold text-gray-900">
-                                        {item.name}
-                                        <span className="absolute inset-0" />
-                                    </a>
-                                    <p className="mt-1 text-sm/6 text-gray-600">{item.description}</p>
-                                </div>
-                            ))}
-                        </PopoverPanel>
+                        {companyOpen && (
+                            <PopoverPanel
+                                static
+                                onMouseEnter={() => {
+                                    clearCompanyTimeout()
+                                    setCompanyOpen(true)
+                                }}
+                                onMouseLeave={handleCompanyClose}
+                                className="absolute left-0 top-full z-10 mt-3 w-96 rounded-3xl bg-white p-4 shadow-lg ring-1 ring-gray-900/5"
+                            >
+                                {company.map((item) => (
+                                    <div key={item.name} className="relative rounded-lg p-4 hover:bg-gray-50">
+                                        <a href={item.href} className="block text-sm/6 font-semibold text-gray-900">
+                                            {item.name}
+                                            <span className="absolute inset-0" />
+                                        </a>
+                                        <p className="mt-1 text-sm/6 text-gray-600">{item.description}</p>
+                                    </div>
+                                ))}
+                            </PopoverPanel>
+                        )}
                     </Popover>
                 </PopoverGroup>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
